@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { ArrowLeft, Clock, Users, BookOpen, Check, MoveRight } from 'lucide-react';
-import { getPrograms, type Program as ProgramType } from '@/lib/data-store';
+import { getPrograms, getCurrentUser, type Program as ProgramType } from '@/lib/data-store';
 
 // Tip tanımlaması
 interface ExtendedProgram extends ProgramType {
@@ -22,8 +22,12 @@ interface ExtendedProgram extends ProgramType {
 export default function ProgramDetail() {
   const { id } = useParams();
   const [program, setProgram] = useState<ExtendedProgram | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const user = getCurrentUser();
+    setIsLoggedIn(!!user);
+
     const allPrograms = getPrograms();
     // ID hem string hem number gelebilir
     const found = allPrograms.find(p => p?.id?.toString() === id?.toString());
@@ -253,7 +257,7 @@ export default function ProgramDetail() {
 
           {/* CTA Butonu */}
           <Link
-            href="/register"
+            href={isLoggedIn ? `/dashboard/egitimlerim/${id}` : "/register"}
             className={`group w-full flex flex-col items-center justify-center gap-2 px-8 py-6 rounded-[2rem] font-black tracking-[0.2em] uppercase text-sm hover:scale-[1.02] transition-all shadow-2xl relative overflow-hidden ${
                          program.category === 'WORKSHOP' ? 'bg-bright-gold-500 text-black shadow-bright-gold-500/30' : 
                          program.category === 'CREATOR' ? 'bg-tomato-500 text-white shadow-tomato-500/30' :
@@ -263,10 +267,12 @@ export default function ProgramDetail() {
           >
             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             <div className="flex items-center gap-3 relative z-10">
-              Hemen Kayıt Ol
+              {isLoggedIn ? 'Eğitime Başla' : 'Hemen Kayıt Ol'}
               <MoveRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" />
             </div>
-            <span className="text-[9px] opacity-50 font-bold tracking-widest relative z-10">Sınırlı Kontenjan</span>
+            <span className="text-[9px] opacity-50 font-bold tracking-widest relative z-10">
+              {isLoggedIn ? 'Kaldığın Yerden Devam Et' : 'Sınırlı Kontenjan'}
+            </span>
           </Link>
         </div>
       </div>

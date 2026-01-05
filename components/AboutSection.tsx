@@ -61,6 +61,13 @@ const categoryData: { [key: string]: { title: string; subtitle: string; descript
 export default function AboutSection({ activeCategory }: AboutSectionProps) {
   const data = categoryData[activeCategory] || categoryData['CREATOR ACADEMY'];
 
+  const scrollToPrograms = () => {
+    const element = document.getElementById('programs-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="about-section" className="py-32 px-6 md:px-24 lg:px-40 bg-white dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-[1800px] mx-auto relative z-10">
@@ -115,6 +122,7 @@ export default function AboutSection({ activeCategory }: AboutSectionProps) {
               key={`${activeCategory}-btn`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
+              onClick={scrollToPrograms}
               className={`group flex items-center gap-3 ${data.buttonColor} px-10 py-5 rounded-full font-black tracking-[0.15em] uppercase text-[10px] hover:scale-105 transition-all shadow-xl shadow-black/10`}
             >
               EĞİTİMLERE GÖZ ATIN

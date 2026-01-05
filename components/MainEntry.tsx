@@ -21,10 +21,15 @@ export default function MainEntry() {
   }, []);
 
   const scrollToNext = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
+    const element = document.getElementById('programs-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -36,6 +41,7 @@ export default function MainEntry() {
           loop 
           muted 
           playsInline
+          preload="auto"
           poster="/images/videokapak.png"
           className="w-full h-full object-cover"
         >

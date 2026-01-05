@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { getTestimonials, type Testimonial } from '@/lib/data-store';
 
@@ -38,42 +38,35 @@ export default function Testimonials() {
   const row2 = [...data.slice(Math.ceil(data.length / 2)), ...data.slice(Math.ceil(data.length / 2))];
 
   return (
-    <section className="py-32 bg-[#fcfcfc] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-      <div className="px-12 md:px-24 lg:px-40 mb-16">
+    <section className="py-32 bg-[#fcfcfc] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/5 dark:border-white/5 transition-colors duration-300 relative">
+      {/* Background Green Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#CCFF00]/10 dark:bg-[#CCFF00]/5 blur-[120px] rounded-full pointer-events-none z-0" />
+
+      <div className="px-12 md:px-24 lg:px-40 mb-16 relative z-10">
         <h2 className="text-[10px] font-black tracking-[0.4em] uppercase opacity-30">Topluluk Sesi / Live Feedback</h2>
       </div>
 
-      <div className="space-y-8 flex flex-col">
+      <div className="space-y-8 flex flex-col relative z-10 marquee-container">
         {/* Row 1 - Kayma sola doğru */}
-        <div className="flex">
-          <motion.div 
-            className="flex gap-6 px-6 gpu-accelerated"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 30 + data.length, ease: "linear", repeat: Infinity }}
-            style={{ willChange: 'transform' }}
-          >
+        <div className="flex overflow-hidden">
+          <div className="flex gap-6 px-6 marquee-left">
             {row1.map((t, i) => (
               <TestimonialBubble key={`row1-${t.id}-${i}`} t={t} />
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* Row 2 - Kayma sağa doğru */}
-        <div className="flex">
-          <motion.div 
-            className="flex gap-6 px-6 gpu-accelerated"
-            animate={{ x: ['-50%', '0%'] }}
-            transition={{ duration: 35 + data.length, ease: "linear", repeat: Infinity }}
-            style={{ willChange: 'transform' }}
-          >
+        <div className="flex overflow-hidden">
+          <div className="flex gap-6 px-6 marquee-right">
             {row2.map((t, i) => (
               <TestimonialBubble key={`row2-${t.id}-${i}`} t={t} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      <div className="mt-20 text-center">
+      <div className="mt-20 text-center relative z-10">
         <p className="text-[10px] font-bold opacity-20 uppercase tracking-[0.5em]">Join the 5000+ creator community</p>
       </div>
     </section>

@@ -3,138 +3,137 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { ArrowLeft, Calendar, Users, Clock, MapPin, MoveRight, Check } from 'lucide-react';
+import { getCurrentUser } from '@/lib/data-store';
 
 const workshops = [
   {
-    id: 1,
+    id: 101,
     title: 'Kurumlar için Etkili Sosyal Medya Kullanımı Eğitimi',
     status: 'Bu eğitim gerçekleşmiştir',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop',
+    image: '/images/loreal.jpg',
     gradient: 'from-blue-900 to-teal-600',
-    description: 'Kurumların dijital dünyada etkili bir şekilde var olabilmesi için sosyal medya stratejileri, içerik planlaması ve marka yönetimi konularında kapsamlı bir eğitim programı.',
-    longDescription: 'Bu workshop, kurumların sosyal medya hesaplarını profesyonel bir şekilde yönetmeleri için gerekli tüm bilgileri içermektedir. İçerik stratejisi oluşturma, hedef kitle analizi, etkileşim artırma teknikleri ve kriz yönetimi gibi konular detaylı olarak ele alınmaktadır. Eğitim, teorik bilgilerin yanı sıra pratik uygulamalar ve gerçek vaka çalışmaları ile desteklenmektedir.',
-    duration: '2 Gün',
-    participants: '25 Kişi',
-    location: 'Hypers Academy, İstanbul',
-    date: '15-16 Mart 2024',
-    instructor: 'Tolga Akış',
+    description: 'L’Oréal Dermatolojik Güzellik Divizyonu için, 35 eczacıdan oluşan Medfluencer ekibine yönelik dijital görünürlüklerini artırmaya yönelik kapsamlı bir program.',
+    longDescription: 'L’Oréal Dermatolojik Güzellik Divizyonu için, 35 eczacıdan oluşan Medfluencer ekibine yönelik dijital görünürlüklerini artırmaya yönelik kapsamlı bir program gerçekleştirilmiştir. Katılımcılara, dijital içerik üretim süreçlerinde alanında uzman isimlerden algoritma tabanlı eğitimler ve dijital strateji oturumları ile profesyonel destek sağlanmıştır. Katılım sağlayan Medfluencer’lar, ürettikleri içerikler üzerinden geri bildirim alarak dijital stratejilerini daha etkin bir şekilde uygulayabilecek bilgi ve beceri kazanmışlardır.',
+    duration: '5 Gün',
+    participants: '35 Kişi',
+    location: 'L\'Oréal HQ / Online',
+    date: 'Ocak 2024',
+    instructor: 'L’ORÉAL DERMATOLOJİK GÜZELLİK',
     topics: [
-      'Sosyal Medya Stratejisi Oluşturma',
-      'İçerik Planlaması ve Takvimi',
-      'Marka Dili ve Tonu Belirleme',
-      'Etkileşim Artırma Teknikleri',
-      'Kriz Yönetimi ve İtibar Yönetimi',
-      'Analitik ve Raporlama'
+      'Dijital Dünyada Marka Olmak',
+      'Marka Olmanın ve İtibarı Yönetebilmenin Yolları',
+      'Dijital Eczane Olmanın Reçetesi',
+      'Güncel Instagram Algoritması',
+      'Etkili Reels Kullanımı',
+      'Tiktok\'da Başarılı İçerik Stratejileri'
     ],
     benefits: [
-      'Sertifikalı eğitim belgesi',
-      'Eğitim materyalleri ve kaynaklar',
-      'Networking fırsatları',
-      'Özel workshop içeriklerine erişim'
+      'Resmi Sertifika',
+      'Algoritma Tabanlı Eğitim',
+      'Dijital Strateji Oturumları',
+      'Profesyonel Geri Bildirim'
     ]
   },
   {
-    id: 2,
+    id: 102,
     title: 'Performans Pazarlaması Eğitimi',
     status: 'Bu eğitim gerçekleşmiştir',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
-    gradient: 'from-purple-900 to-pink-600',
-    description: 'Dijital pazarlamada ROI odaklı stratejiler, reklam kampanyası yönetimi ve performans ölçümleme teknikleri üzerine yoğun bir eğitim programı.',
-    longDescription: 'Performans pazarlaması, dijital dünyada markaların en çok ihtiyaç duyduğu alanlardan biridir. Bu workshop, Google Ads, Meta Ads ve diğer platformlarda etkili kampanya yönetimi, bütçe optimizasyonu ve conversion artırma tekniklerini kapsamaktadır.',
-    duration: '1 Gün',
-    participants: '20 Kişi',
-    location: 'Hypers Academy, İstanbul',
-    date: '22 Mart 2024',
-    instructor: 'Çiçek Çizmeci',
+    image: '/images/anadolu-efes.jpg',
+    gradient: 'from-blue-800 to-blue-500',
+    description: '4 farklı ülkeden 70\'ten fazla Efes Global çalışanına özel olarak tasarlanan İngilizce eğitim programı.',
+    longDescription: '4 farklı ülkeden 70\'ten fazla Efes Global çalışanına özel olarak tasarlanan eğitim programımızda, \'Yeni Medya-İçerik Üreticiliği\' ve \'Performans Analizi\' başlıklarında İngilizce olarak kapsamlı eğitimler gerçekleştirilmiştir. Katılımcılar, dijital medya ve içerik üretimi alanındaki en güncel trendleri ve analiz tekniklerini öğrenerek, küresel ölçekte etkili stratejiler geliştirebilecek bilgi ve deneyim elde etmişlerdir.',
+    duration: '3 Gün',
+    participants: '70+ Kişi',
+    location: 'Efes Global / Hybrid',
+    date: 'Şubat 2024',
+    instructor: 'ANADOLU EFES',
     topics: [
-      'Kampanya Stratejisi Geliştirme',
-      'Hedef Kitle Segmentasyonu',
-      'Bütçe Optimizasyonu',
-      'A/B Testing ve Optimizasyon',
-      'Conversion Tracking',
-      'ROI Hesaplama ve Raporlama'
+      'Instagram Algorithm',
+      'Effective Content On TikTok',
+      'Youtube Performance Analysis and Channel Optimization',
+      'Performance & Brand Analysis',
+      'Facebook Insights Reporting and Meta Suite'
     ],
     benefits: [
-      'Sertifikalı eğitim belgesi',
-      'Eğitim materyalleri ve kaynaklar',
-      'Networking fırsatları',
-      'Özel workshop içeriklerine erişim'
+      'Global Sertifika',
+      'İngilizce Eğitim İçeriği',
+      'Performans Analiz Teknikleri',
+      'Stratejik Gelişim'
     ]
   },
   {
-    id: 3,
-    title: 'İçerik Stratejisi ve Yaratıcılık Workshop',
+    id: 8,
+    title: 'Workshop Weekly',
     status: 'Yakında',
     image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop',
-    gradient: 'from-indigo-900 to-blue-600',
-    description: 'Yaratıcı içerik üretimi, storytelling teknikleri ve marka hikayesi oluşturma konularında pratik odaklı bir workshop programı.',
-    longDescription: 'Bu workshop, içerik üreticilerinin yaratıcı düşünme becerilerini geliştirmeleri ve etkileyici hikayeler anlatabilmeleri için tasarlanmıştır. Storytelling teknikleri, görsel tasarım prensipleri ve içerik formatları detaylı olarak ele alınacaktır.',
-    duration: '2 Gün',
-    participants: '30 Kişi',
-    location: 'Hypers Academy, İstanbul',
-    date: '5-6 Nisan 2024',
-    instructor: 'Berkan Bilgiç',
+    gradient: 'from-blue-700 to-blue-400',
+    description: 'Haftalık yoğun ve pratik odaklı eğitim programı.',
+    longDescription: 'Haftalık bazda düzenlenen bu yoğun workshop programı, katılımcıların kısa sürede spesifik alanlarda uzmanlaşmasını hedefler. Her hafta farklı bir tema ile pratik uygulamalar yapılır.',
+    duration: '1 Hafta',
+    participants: '15 Kişi',
+    location: 'Hypers Academy',
+    date: 'Her Pazartesi',
+    instructor: 'Pınar Musaoğlu',
     topics: [
-      'Storytelling ve Hikaye Anlatımı',
-      'Görsel İçerik Tasarımı',
-      'Video İçerik Üretimi',
-      'Marka Hikayesi Oluşturma',
-      'İçerik Takvimi ve Planlama',
-      'Yaratıcı Süreç Yönetimi'
+      'Haftalık Hedef Belirleme',
+      'Yoğun Pratik Uygulamalar',
+      'Grup Çalışmaları',
+      'Mentorluk Seansları'
     ],
     benefits: [
-      'Sertifikalı eğitim belgesi',
-      'Eğitim materyalleri ve kaynaklar',
-      'Networking fırsatları',
-      'Özel workshop içeriklerine erişim'
+      'Yoğunlaştırılmış Öğrenme',
+      'Hızlı Yetkinlik Kazanımı',
+      'Sertifika'
     ]
   },
   {
-    id: 4,
-    title: 'Video Prodüksiyon ve Kurgu Atölyesi',
+    id: 17,
+    title: 'Intensive Bootcamp',
     status: 'Yakında',
     image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop',
-    gradient: 'from-orange-900 to-red-600',
-    description: 'Profesyonel video prodüksiyon teknikleri, kamera kullanımı, ışıklandırma ve post-prodüksiyon süreçleri üzerine kapsamlı bir atölye çalışması.',
-    longDescription: 'Video içeriği, dijital dünyanın en güçlü iletişim araçlarından biridir. Bu atölye, katılımcılara profesyonel video prodüksiyonunun tüm aşamalarını öğretmeyi hedeflemektedir. Çekim tekniklerinden kurgu süreçlerine kadar her adım pratik uygulamalarla desteklenecektir.',
-    duration: '3 Gün',
-    participants: '15 Kişi',
-    location: 'Hypers Academy, İstanbul',
-    date: '12-14 Nisan 2024',
-    instructor: 'Caner Aras',
+    gradient: 'from-blue-600 to-blue-300',
+    description: 'Kariyerinizi bir üst seviyeye taşıyacak yoğun bootcamp programı.',
+    longDescription: 'İş dünyasının talep ettiği becerileri kazandırmak üzere tasarlanmış, sonuç odaklı ve yoğunlaştırılmış bir eğitim maratonu. Gerçek projeler üzerinde çalışarak deneyim kazanın.',
+    duration: '2 Hafta',
+    participants: '12 Kişi',
+    location: 'Hypers Academy',
+    date: '15 Mayıs 2024',
+    instructor: 'Pınar Musaoğlu',
     topics: [
-      'Kamera Teknikleri ve Açılar',
-      'Işıklandırma ve Kompozisyon',
-      'Ses Kaydı ve Mikrofon Kullanımı',
-      'Post-Prodüksiyon ve Kurgu',
-      'Renk Düzenleme ve Grading',
-      'Final Export ve Optimizasyon'
+      'Proje Bazlı Öğrenme',
+      'Sektörel Standartlar',
+      'Kariyer Planlama',
+      'Portfolyo Oluşturma'
     ],
     benefits: [
-      'Sertifikalı eğitim belgesi',
-      'Eğitim materyalleri ve kaynaklar',
-      'Networking fırsatları',
-      'Özel workshop içeriklerine erişim',
-      'Stüdyo kullanım hakkı'
+      'Kariyer Mentorluğu',
+      'Network Erişimi',
+      'Başarı Sertifikası'
     ]
-  },
+  }
 ];
 
 export default function WorkshopDetail() {
   const { id } = useParams();
   const workshop = workshops.find(w => w.id === Number(id)) || workshops[0];
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!getCurrentUser());
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#0a0a0a] transition-colors duration-300 pt-32 px-12 md:px-24 lg:px-40 pb-32 text-black dark:text-white">
       <Navigation />
 
       {/* Geri Dön Butonu */}
-      <Link href="/workshop" className="flex items-center gap-2 opacity-40 hover:opacity-100 transition-all mb-16 group">
+      <Link href="/programlar/workshop" className="flex items-center gap-2 opacity-40 hover:opacity-100 transition-all mb-16 group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        <span className="text-[10px] font-bold tracking-widest uppercase">Workshop'lara Dön</span>
+        <span className="text-[10px] font-black tracking-widest uppercase">Workshop'lara Dön</span>
       </Link>
 
       {/* Üst Kısım: Hero Görsel ve Başlık */}
@@ -256,14 +255,18 @@ export default function WorkshopDetail() {
       {/* Alt Kısım: CTA */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-12 bg-white dark:bg-[#111111] rounded-[2.5rem] border border-black/5 dark:border-white/5">
         <div>
-          <h3 className="text-2xl font-black tracking-tighter uppercase mb-2">Workshop'a Katılmak İster misiniz?</h3>
-          <p className="text-sm opacity-50">Detaylı bilgi ve kayıt için bizimle iletişime geçin.</p>
+          <h3 className="text-2xl font-black tracking-tighter uppercase mb-2">
+            {isLoggedIn ? "Eğitiminize Hemen Başlayın" : "Workshop'a Katılmak İster misiniz?"}
+          </h3>
+          <p className="text-sm opacity-50">
+            {isLoggedIn ? "Tüm içeriklere dashboard üzerinden erişebilirsiniz." : "Detaylı bilgi ve kayıt için bizimle iletişime geçin."}
+          </p>
         </div>
         <Link
-          href="/register"
+          href={isLoggedIn ? `/dashboard/egitimlerim/${id}` : "/register"}
           className="group flex items-center gap-3 bg-[#CCFF00] text-black px-8 py-4 rounded-full font-black tracking-widest uppercase text-xs hover:scale-105 transition-all shadow-lg shadow-[#CCFF00]/20"
         >
-          Kayıt Ol
+          {isLoggedIn ? "Eğitime Başla" : "Kayıt Ol"}
           <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

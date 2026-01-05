@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { MoveRight, ChevronRight, Mail, Lock, Sparkles, User } from 'lucide-react';
+import { MoveRight, ChevronRight, Mail, Lock, Sparkles, User, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { loginUser } from '@/lib/data-store';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -19,6 +19,7 @@ function LoginContent() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (searchParams.get('registered')) {
@@ -50,24 +51,24 @@ function LoginContent() {
       <Navigation />
       
       {/* Giriş İçeriği */}
-      <div className="px-12 md:px-24 lg:px-40 pb-32 flex flex-col min-h-[calc(100vh-96px)] mt-[-20px] md:mt-[-40px]">
+      <div className="px-6 md:px-24 lg:px-40 pb-32 flex flex-col min-h-[calc(100vh-96px)] mt-[-20px] md:mt-[-40px]">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-12 opacity-30 text-[9px] font-bold tracking-widest uppercase">
+        <div className="flex items-center gap-2 mb-8 md:mb-12 opacity-30 text-[9px] font-bold tracking-widest uppercase">
           <Link href="/" className="hover:text-black dark:hover:text-white transition-colors">Anasayfa</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-black dark:text-white">Giriş Yap</span>
         </div>
 
         {/* Form ve Başlık Alanı - Dengeli grid */}
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start flex-grow">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start flex-grow">
           
           {/* Sol Taraf: Dev Başlık */}
-          <div className="flex flex-col pt-10">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] mb-12">
+          <div className="flex flex-col pt-4 md:pt-10">
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] mb-8 md:mb-12">
               Tekrar <br /> Hoş Geldin.
             </h1>
-            <div className="space-y-8 max-w-md">
-              <p className="text-xl font-medium opacity-50 leading-relaxed">
+            <div className="space-y-6 md:space-y-8 max-w-md">
+              <p className="text-lg md:text-xl font-medium opacity-50 leading-relaxed">
                 Hypers Creator Academy ekosistemine geri dön ve eğitimlerine kaldığın yerden devam et.
               </p>
               <div className="flex flex-col gap-4">
@@ -91,8 +92,7 @@ function LoginContent() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -5 }}
-            className="bg-white dark:bg-[#0a0a0a] p-10 md:p-14 rounded-[3.5rem] border-[1.5px] border-black/10 dark:border-white/10 hover:border-[#CCFF00] hover:bg-[#CCFF00]/[0.01] transition-all duration-500 shadow-2xl min-h-[600px] lg:h-auto flex flex-col justify-center relative overflow-hidden group/box"
+            className="bg-white dark:bg-[#0a0a0a] p-8 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border-[1.5px] border-black/10 dark:border-white/10 hover:border-[#CCFF00] hover:bg-[#CCFF00]/[0.01] transition-all duration-500 shadow-2xl min-h-[500px] md:min-h-[600px] lg:h-auto flex flex-col justify-center relative overflow-hidden group/box"
           >
             {/* Subtle Gradient Glow */}
             <div className="absolute -right-32 -top-32 w-64 h-64 bg-[#CCFF00]/5 blur-[100px] opacity-0 group-hover/box:opacity-100 transition-all duration-700" />
@@ -123,23 +123,32 @@ function LoginContent() {
                 <input 
                   type="email" 
                   required
-                  placeholder="E-POSTA ADRESİNİZ"
+                  placeholder="e-posta adresiniz"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-gray-50/50 dark:bg-white/5 border-none rounded-2xl px-6 py-4 text-[11px] font-bold uppercase tracking-widest focus:ring-2 focus:ring-black dark:focus:ring-white transition-all outline-none"
+                  onChange={(e) => setFormData({...formData, email: e.target.value.toLowerCase()})}
+                  className="w-full bg-gray-50/50 dark:bg-white/5 border-none rounded-2xl px-6 py-4 text-[11px] font-bold tracking-widest focus:ring-2 focus:ring-black dark:focus:ring-white transition-all outline-none"
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <label className="text-[10px] font-black tracking-widest uppercase opacity-30 px-2">Şifre</label>
-                <input 
-                  type="password" 
-                  required
-                  placeholder="ŞİFRENİZ"
-                  value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  className="w-full bg-gray-50/50 dark:bg-white/5 border-none rounded-2xl px-6 py-4 text-[11px] font-bold uppercase tracking-widest focus:ring-2 focus:ring-black dark:focus:ring-white transition-all outline-none"
-                />
+                <div className="relative">
+                  <input 
+                    type={showPassword ? "text" : "password"}
+                    required
+                    placeholder="ŞİFRENİZ"
+                    value={formData.password}
+                    onChange={(e) => setFormData({...formData, password: e.target.value})}
+                    className="w-full bg-gray-50/50 dark:bg-white/5 border-none rounded-2xl px-6 py-4 text-[11px] font-bold uppercase tracking-widest focus:ring-2 focus:ring-black dark:focus:ring-white transition-all outline-none pr-14"
+                  />
+                  <button 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-6 top-1/2 -translate-y-1/2 opacity-30 hover:opacity-100 transition-opacity"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
 
               {/* Şifremi Unuttum Linki */}

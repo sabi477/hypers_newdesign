@@ -110,10 +110,10 @@ function PricingContent() {
 
       {/* Sayfa Başlığı - Daha Zarif ve Minimal Tasarım */}
       <div className="text-center mb-16 relative z-10">
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-2 text-black dark:text-white leading-tight">
+        <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-2 text-black dark:text-white leading-tight">
           {config.name}
         </h1>
-        <p className="text-sm font-bold opacity-20 uppercase tracking-[0.3em] mb-8">PRICING PLANS</p>
+        <p className="text-[10px] md:text-sm font-bold opacity-20 uppercase tracking-[0.3em] mb-8">PRICING PLANS</p>
         
         <div className="flex justify-center">
           {/* Bilgilendirme - Daha Az Belirgin ve Zarif */}

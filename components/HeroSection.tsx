@@ -121,7 +121,7 @@ export default function HeroSection({ title, subItems, isHovered, setIsHovered, 
                             categoryCode === 'CREATOR' ? '/programlar/icerik-ureticiligi' :
                             categoryCode === 'MUSIC' ? '/programlar/muzik' :
                             categoryCode === 'ACTING' ? '/programlar/oyunculuk' :
-                            categoryCode === 'WORKSHOP' ? '/programlar/workshop' : '/programlar'
+                            categoryCode === 'WORKSHOP' ? '/programlar/workshop' : '/'
                           ) :
                           item === 'Destek' ? '/destek' : '#'
                         }

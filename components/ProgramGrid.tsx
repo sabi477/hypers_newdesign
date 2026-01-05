@@ -53,7 +53,7 @@ const ProgramRow = ({ title, catCode, items }: { title: string, catCode: string,
               catCode === 'CREATOR' ? '/programlar/icerik-ureticiligi' :
               catCode === 'MUSIC' ? '/programlar/muzik' :
               catCode === 'ACTING' ? '/programlar/oyunculuk' :
-              catCode === 'WORKSHOP' ? '/programlar/workshop' : '/programlar'
+              catCode === 'WORKSHOP' ? '/programlar/workshop' : '/'
             }
             className="group flex items-center gap-1 text-[8px] font-bold tracking-widest uppercase opacity-30 hover:opacity-100 transition-all mr-4"
           >
@@ -155,7 +155,7 @@ export default function ProgramGrid() {
   const actingPrograms = programs.filter(p => p.category === 'ACTING');
 
   return (
-    <section className="py-20 bg-white dark:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden">
+    <section id="programs-section" className="py-20 bg-white dark:bg-[#0a0a0a] transition-colors duration-300 overflow-hidden">
       <ProgramRow title="İÇERİK ÜRETİCİLİĞİ" catCode="CREATOR" items={creatorPrograms} />
       <ProgramRow title="MÜZİK" catCode="MUSIC" items={musicPrograms} />
       <ProgramRow title="OYUNCULUK" catCode="ACTING" items={actingPrograms} />

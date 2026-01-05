@@ -15,7 +15,7 @@ const allPrograms = [
     desc: 'L’Oréal Dermatolojik Güzellik Divizyonu için, 35 eczacıdan oluşan Medfluencer ekibine yönelik dijital görünürlüklerini artırmaya yönelik kapsamlı bir program. Algoritma tabanlı eğitimler ve strateji oturumları.', 
     lessons: 8, 
     instructor: 'L’ORÉAL DERMATOLOJİK GÜZELLİK',
-    image: '/images/loreal.jpg'
+    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop'
   },
   { 
     id: 102, 
@@ -24,11 +24,35 @@ const allPrograms = [
     desc: 'Anadolu Efes Global çalışanlarına özel; Yeni Medya, İçerik Üreticiliği ve Performans Analizi konularında İngilizce olarak gerçekleştirilen kapsamlı eğitim programı.', 
     lessons: 12, 
     instructor: 'ANADOLU EFES',
-    image: '/images/anadolu-efes.jpg'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2026&auto=format&fit=crop'
   },
-  { id: 8, title: 'Workshop Weekly', category: 'WORKSHOP', desc: 'Haftalık yoğun kamp.', lessons: 4, instructor: 'Pınar Musaoğlu' },
-  { id: 17, title: 'Intensive Bootcamp', category: 'WORKSHOP', desc: 'Yoğun eğitim kampı.', lessons: 6, instructor: 'Pınar Musaoğlu' },
-  { id: 18, title: 'Weekend Workshop', category: 'WORKSHOP', desc: 'Hafta sonu atölye çalışması.', lessons: 3, instructor: 'Pınar Musaoğlu' },
+  { 
+    id: 8, 
+    title: 'Workshop Weekly', 
+    category: 'WORKSHOP', 
+    desc: 'Haftalık yoğun kamp. Her hafta yeni bir konu ve pratik uygulama ile yeteneklerini bir üst seviyeye taşı.', 
+    lessons: 4, 
+    instructor: 'Pınar Musaoğlu',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop'
+  },
+  { 
+    id: 17, 
+    title: 'Intensive Bootcamp', 
+    category: 'WORKSHOP', 
+    desc: 'Yoğun eğitim kampı. Kısa sürede maksimum verim alabileceğiniz, sektörel standartlarda hazırlanan bootcamp programı.', 
+    lessons: 6, 
+    instructor: 'Pınar Musaoğlu',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop'
+  },
+  { 
+    id: 18, 
+    title: 'Weekend Workshop', 
+    category: 'WORKSHOP', 
+    desc: 'Hafta sonu atölye çalışması. Cumartesi ve Pazar günleri gerçekleştirilen, odaklanmış pratik eğitimler.', 
+    lessons: 3, 
+    instructor: 'Pınar Musaoğlu',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=2070&auto=format&fit=crop'
+  },
 ];
 
 export default function WorkshopProgramsPage() {
@@ -36,9 +60,11 @@ export default function WorkshopProgramsPage() {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const carouselSlides = [
-    { id: 1, img: '/images/bad18b0687c5e9e113d022752f5e9a2d.jpg', title: 'Yoğun Kamp', subtitle: 'Haftalık Pratik Odaklı Eğitimler' },
-    { id: 2, img: '/images/b7ba1dbb63b2b2a4bc5254d8ce27cae6.jpg', title: 'Sektörel Pratik', subtitle: 'Gerçek Deneyim Kazanın' },
-    { id: 3, img: '/images/%20-113.jpg', title: 'Uzman Mentorlar', subtitle: 'Sektörün En İyilerinden Öğrenin' },
+    { id: 1, img: '/images/kapak2.jpg', title: 'Yeni Nesil Atölyeler', subtitle: 'Yaratıcılığınızı Teknolojiyle Birleştirin' },
+    { id: 2, img: 'https://images.unsplash.com/photo-1492619334731-2fce6f0459bb?q=80&w=2070&auto=format&fit=crop', title: 'İçerik Üreticiliği', subtitle: 'Yeni Nesil Dijital Stratejiler' },
+    { id: 3, img: 'https://images.unsplash.com/photo-1514525253344-762397117a26?q=80&w=2070&auto=format&fit=crop', title: 'Müzik Prodüksiyonu', subtitle: 'Kendi Sesini Dünyaya Duyur' },
+    { id: 4, img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop', title: 'Oyunculuk Workshop', subtitle: 'Sahne ve Kamera Önü Teknikleri' },
+    { id: 5, img: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=2056&auto=format&fit=crop', title: 'Yaratıcı Yazarlık', subtitle: 'Hikayeni Güçlü Anlat' },
   ];
 
   useEffect(() => {
@@ -69,10 +95,10 @@ export default function WorkshopProgramsPage() {
       </div>
 
       <div className="mb-20 text-center relative z-10">
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 text-black dark:text-white leading-tight">
+        <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-4 text-black dark:text-white leading-tight">
           HYPERS <span className="opacity-20 italic">Workshop</span>
         </h1>
-        <p className="text-sm font-bold opacity-30 uppercase tracking-[0.3em] mb-8">Yoğun ve pratik odaklı eğitimlerle yeteneklerini geliştir.</p>
+        <p className="text-[10px] md:text-sm font-bold opacity-30 uppercase tracking-[0.3em] mb-8">Yoğun ve pratik odaklı eğitimlerle yeteneklerini geliştir.</p>
       </div>
 
       {/* Workshop Hero Carousel */}
@@ -152,7 +178,7 @@ export default function WorkshopProgramsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <AnimatePresence mode="popLayout">
           {filteredPrograms.map((prog) => (
-            <Link key={prog.id} href={`/program/${prog.category}-${prog.id - 1}`} className="h-full p-4 -m-4">
+            <Link key={prog.id} href={`/programlar/workshop/${prog.id}`} className="h-full p-4 -m-4">
               <motion.div 
                 layout
                 initial={{ opacity: 0, y: 20 }}
@@ -166,30 +192,42 @@ export default function WorkshopProgramsPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-blue-500/50 to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative w-full h-full bg-[#fcfcfc] dark:bg-[#111111] rounded-[2.5rem] flex flex-col overflow-hidden">
-                  {/* Image Section */}
-                  {(prog as any).image && (
-                    <div className="h-48 overflow-hidden relative">
-                      <div 
-                        className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                        style={{ backgroundImage: `url('${(prog as any).image}')` }}
-                      />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
-                    </div>
-                  )}
+                  {/* Image Section - Always rendered for consistency */}
+                  <div className="h-52 overflow-hidden relative shrink-0">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                      style={{ backgroundImage: `url('${(prog as any).image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop'}')` }}
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                  </div>
 
-                  <div className="p-8 flex flex-col flex-grow relative z-10">
+                  <div className="p-8 flex flex-col flex-grow relative z-10 min-h-[280px]">
                     {/* Glossy Overlay Reflection */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none opacity-50" />
                     
                     <div className="flex justify-between items-start mb-6 relative z-10">
                       <span className="text-[10px] font-black opacity-30 tracking-widest uppercase">{prog.category} — {prog.lessons} DERS</span>
-                      <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
+                      <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300 shrink-0">
                         <MoveRight className="w-4 h-4 group-hover:text-white dark:group-hover:text-black transition-colors" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-black tracking-tighter uppercase mb-2 leading-[0.9] relative z-10">{prog.title}</h3>
+                    
+                    <div className="mb-4 h-20 relative z-10">
+                      <h3 className="text-lg md:text-xl font-black tracking-tighter uppercase leading-[1] line-clamp-3">
+                        {prog.title}
+                      </h3>
+                    </div>
+
                     <p className="text-[10px] font-bold opacity-40 uppercase tracking-widest mb-6 relative z-10">{prog.instructor}</p>
-                    <p className="text-sm font-medium opacity-60 leading-relaxed line-clamp-3 mb-6 flex-grow relative z-10">{prog.desc}</p>
+                    
+                    <div className="flex-grow">
+                      <p className="text-[11px] md:text-xs font-medium opacity-60 leading-relaxed line-clamp-4 relative z-10">
+                        {prog.desc}
+                      </p>
+                    </div>
+                    
+                    {/* Bottom spacer to prevent text from touching the edge */}
+                    <div className="h-4" />
                   </div>
                 </div>
               </motion.div>
